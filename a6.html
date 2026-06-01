@@ -1,0 +1,298 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <title>for audrey! ❀</title>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        font-family: "Montserrat", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        perspective: 1000px;
+      }
+
+      #particles-js {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        background-image: radial-gradient(ellipse at center, #4a90d9, #002366);
+      }
+
+      .card-container {
+        position: relative;
+        width: min(90vw, 450px);
+        height: min(80vh, 500px);
+        transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        transform-style: preserve-3d;
+        cursor: pointer;
+        z-index: 10;
+      }
+
+      @media (max-width: 480px) {
+        .card-container {
+          width: 92vw;
+          height: 82vh;
+        }
+      }
+
+      @media (min-width: 900px) {
+        .card-container {
+          width: min(70vw, 700px);
+          height: min(75vh, 560px);
+        }
+      }
+
+      .card-container.flipped {
+        transform: rotateY(180deg);
+      }
+
+      .front,
+      .back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        box-shadow:
+          0 10px 40px rgba(0, 0, 0, 0.5),
+          0 0 24px #5b9bd5;
+      }
+
+      .front {
+        background-color: #ddeeff;
+        background-image: linear-gradient(135deg, #ddeeff 0%, #aacfee 100%);
+        padding: 20px;
+      }
+
+      .front::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 56, 168, 0.06);
+        clip-path: polygon(0 0, 50% 50%, 100% 0, 100% 100%, 0 100%);
+        border-radius: 20px;
+      }
+
+      .back {
+        background-color: #f5f9ff;
+        transform: rotateY(180deg);
+        padding: clamp(20px, 4vw, 40px);
+        justify-content: flex-start;
+        overflow-y: auto;
+      }
+
+      .stamp-button {
+        width: clamp(55px, 10vw, 80px);
+        height: clamp(55px, 10vw, 80px);
+        background: linear-gradient(135deg, #002366, #1a6fc4);
+        border-radius: 50%;
+        border: 3px dashed rgba(255, 255, 255, 0.85);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 0 15px #5b9bd5;
+        animation: stampPulse 2s infinite;
+        z-index: 2;
+        margin: 10px 0;
+        flex-shrink: 0;
+      }
+
+      @keyframes stampPulse {
+        0% {
+          box-shadow: 0 0 10px #1a6fc4;
+        }
+        50% {
+          box-shadow:
+            0 0 22px #1a6fc4,
+            0 0 34px rgba(26, 111, 196, 0.4);
+        }
+        100% {
+          box-shadow: 0 0 10px #1a6fc4;
+        }
+      }
+
+      .stamp-button::after {
+        content: "❤";
+        color: white;
+        font-size: clamp(22px, 4vw, 34px);
+      }
+
+      .script-text {
+        font-family: "Great Vibes", cursive;
+        color: #002d87;
+        text-align: center;
+      }
+
+      .front .script-text {
+        font-size: clamp(32px, 8vw, 58px);
+        margin: 0;
+        z-index: 2;
+      }
+
+      .back .script-text {
+        font-size: clamp(22px, 5vw, 36px);
+        margin-top: 0;
+      }
+
+      .back p {
+        text-align: justify;
+        line-height: 1.7;
+        font-size: clamp(12px, 1.8vw, 15px);
+        color: #0a1a3a;
+        margin: 0;
+      }
+
+      .click-hint {
+        margin-top: 10px;
+        font-weight: bold;
+        color: #002d87;
+        font-size: clamp(8px, 1.5vw, 11px);
+        letter-spacing: 2px;
+        z-index: 2;
+      }
+
+      .back::-webkit-scrollbar {
+        width: 5px;
+      }
+      .back::-webkit-scrollbar-thumb {
+        background: #1a6fc4;
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="particles-js"></div>
+
+    <div class="card-container" id="card" onclick="toggleFlip(event)">
+      <div class="front">
+        <p class="script-text">❀.˖to audrey˖.❀</p>
+        <div class="stamp-button"></div>
+        <p class="click-hint">flip me.</p>
+      </div>
+
+      <div class="back">
+        <h1 class="script-text">☆*: .｡. Surprise! .｡.:*☆</h1>
+        <p>
+          <br />
+          HAI AUDREYYYYY!! (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ I hope you like this little surprise I
+          made for you!! I know it's not much but I just wanted to do something
+          special because I want to congratulate you in surviving freshie year
+          (OHYEAAA). I also want to say that I'm really proud of you for how
+          much you've worked hard. :> <br /><br />
+          I am very grateful to have you as a friend because ohmygod... where do
+          I even start?? Besides the fact we've been friends since HS days, I
+          feel like we've really grown together (especially when we yearn for
+          SHS days) and I'm so happy to see how much you've blossomed into the
+          grEEEat person you are today. I can't picture my freshie year without
+          you honestly, and I hope we can continue to make more memories and go
+          on more side quests together!! I am just very happy that there's
+          someone like you in my life, literally my twinnie since back then and
+          even until now huhu. You keep me grounded and sane in this... crazy
+          fricking course, and I just want to say thank you for being you and
+          for being such an amazEEEng friend hehe
+          <br /><br />
+          By the words of Sir Resty...............
+          <br />
+          AYO From the east to the north turn counterclockwise <br />
+          When the chalk hits the vector, the angle we measure! <br />
+          Break it down !!!! <br /><br />
+          HAHAHAHAHAHA In all seriousness though, I love you so muchhh and I
+          hope you will forever know that! Keep that <b>AUDREY</b>naline alive!!
+          LOVE YOUUUUU MWAMWA! <br /><br />
+          <span class="script-text" style="font-size: clamp(22px, 4vw, 30px)"
+            >Ysa</span
+          >
+        </p>
+      </div>
+    </div>
+
+    <script>
+      let musicStarted = false;
+
+      function toggleFlip(e) {
+        e.stopPropagation();
+        const card = document.getElementById("card");
+        const music = document.getElementById("bgMusic");
+        card.classList.toggle("flipped");
+        if (!musicStarted) {
+          music && music.play().catch(() => {});
+          musicStarted = true;
+        }
+      }
+
+      window.onload = function () {
+        particlesJS("particles-js", {
+          particles: {
+            number: { value: 150, density: { enable: true, value_area: 800 } },
+            color: { value: ["#ffffff", "#aacfee", "#1a6fc4", "#ddeeff"] },
+            shape: { type: "circle" },
+            opacity: { value: 0.6, random: true },
+            size: { value: 3.5, random: true },
+            line_linked: {
+              enable: true,
+              distance: 150,
+              color: "#5b9bd5",
+              opacity: 0,
+              width: 1,
+            },
+            move: {
+              enable: true,
+              speed: 4,
+              direction: "none",
+              random: true,
+              straight: false,
+              out_mode: "out",
+              bounce: false,
+            },
+          },
+          interactivity: {
+            detect_on: "window",
+            events: {
+              onhover: { enable: true, mode: "grab" },
+              onclick: { enable: true, mode: "push" },
+              resize: true,
+            },
+            modes: {
+              grab: { distance: 200, line_linked: { opacity: 0.8 } },
+              push: { particles_nb: 25 },
+            },
+          },
+          retina_detect: true,
+        });
+      };
+    </script>
+  </body>
+</html>

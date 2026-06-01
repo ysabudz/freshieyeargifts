@@ -1,0 +1,360 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <title>for you.</title>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        font-family: "Montserrat", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        perspective: 1000px;
+      }
+
+      #particles-js {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        background-image: radial-gradient(ellipse at center, #f28b82, #8b1a1a);
+      }
+
+      .card-container {
+        position: relative;
+        width: min(90vw, 450px);
+        height: min(80vh, 500px);
+        transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        transform-style: preserve-3d;
+        cursor: pointer;
+        z-index: 10;
+      }
+
+      @media (max-width: 480px) {
+        .card-container {
+          width: 92vw;
+          height: 82vh;
+        }
+      }
+
+      @media (min-width: 900px) {
+        .card-container {
+          width: min(70vw, 700px);
+          height: min(75vh, 560px);
+        }
+      }
+
+      .card-container.flipped {
+        transform: rotateY(180deg);
+      }
+
+      .front,
+      .back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        box-shadow:
+          0 10px 40px rgba(0, 0, 0, 0.4),
+          0 0 24px #e07070;
+      }
+
+      .front {
+        background-color: #fdecea;
+        background-image: linear-gradient(135deg, #fdecea 0%, #f5b8b8 100%);
+        padding: 20px;
+      }
+
+      .front::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(200, 50, 50, 0.06);
+        clip-path: polygon(0 0, 50% 50%, 100% 0, 100% 100%, 0 100%);
+        border-radius: 20px;
+      }
+
+      .back {
+        background-color: #fff8f8;
+        transform: rotateY(180deg);
+        padding: clamp(20px, 4vw, 40px);
+        justify-content: flex-start;
+        overflow-y: auto;
+      }
+
+      .stamp-button {
+        width: clamp(55px, 10vw, 80px);
+        height: clamp(55px, 10vw, 80px);
+        background: linear-gradient(135deg, #c0392b, #e57373);
+        border-radius: 50%;
+        border: 3px dashed rgba(255, 255, 255, 0.85);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 0 15px #e07070;
+        animation: stampPulse 2s infinite;
+        z-index: 2;
+        margin: 10px 0;
+        flex-shrink: 0;
+      }
+
+      @keyframes stampPulse {
+        0% {
+          box-shadow: 0 0 10px #e57373;
+        }
+        50% {
+          box-shadow:
+            0 0 22px #e57373,
+            0 0 34px rgba(229, 115, 115, 0.4);
+        }
+        100% {
+          box-shadow: 0 0 10px #e57373;
+        }
+      }
+
+      .stamp-button::after {
+        content: "❤";
+        color: white;
+        font-size: clamp(22px, 4vw, 34px);
+      }
+
+      .script-text {
+        font-family: "Great Vibes", cursive;
+        color: #b71c1c;
+        text-align: center;
+      }
+
+      .front .script-text {
+        font-size: clamp(32px, 8vw, 58px);
+        margin: 0;
+        z-index: 2;
+      }
+
+      .back .script-text {
+        font-size: clamp(22px, 5vw, 36px);
+        margin-top: 0;
+      }
+
+      .back p {
+        text-align: justify;
+        line-height: 1.7;
+        font-size: clamp(12px, 1.8vw, 15px);
+        color: #2a0a0a;
+        margin: 0;
+      }
+
+      .click-hint {
+        margin-top: 10px;
+        font-weight: bold;
+        color: #b71c1c;
+        font-size: clamp(8px, 1.5vw, 11px);
+        letter-spacing: 2px;
+        z-index: 2;
+      }
+
+      .back::-webkit-scrollbar {
+        width: 5px;
+      }
+      .back::-webkit-scrollbar-thumb {
+        background: #e57373;
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="particles-js"></div>
+
+    <div class="card-container" id="card" onclick="toggleFlip(event)">
+      <div class="front">
+        <p class="script-text"></p>
+        <div class="stamp-button"></div>
+        <p class="click-hint">flip me.</p>
+      </div>
+
+      <div class="back">
+        <p>
+          <br />
+          Hello. Grabe isang month na since 'di tayo nag-usap, haha. I can't
+          believe ako na ang unang mags-"set the record straight." Hopefully,
+          this will be the last time na may ibibigay ako na message sa'yo.
+          <br /><br />
+          As said sa prompt, I'm thanking everyone who was a part of my freshie
+          year, and sadly isa ka doon. I appreciated what we had, the memories
+          we shared. Obviously naman kasi simula noong May, I haven't done
+          anything but cry about the situation (well-documented rin sa Twitter,
+          of course) because the friendship, the memories, meant that much to
+          me.
+          <br /><br />
+          I want to thank you for making most of my freshie year an
+          unforgettable one, kaso masyado mong ginalingan doon eh. 'Di ko
+          makakalimutan na pinaghintay mo ako ng matagal until I had a clear
+          sign na parang haha, hindi mo na ako lalapitan or sasabihan ng sorry
+          or babawi ever. Naiinis lang ako doon kasi mas inuna mo org works
+          kaysa sa pagbabawi, parang najustify lang 'yung sinabi ko noon na
+          parang ginamit mo lang ako kasi 'di mo kinaya ang pagbalance ng acads
+          at ang beloved org work mo. Lahat ng actions na ginawa at ginagawa mo
+          justify all that I confronted to you back in April.
+          <br /><br />
+          I wanted to form a deeper friendship with you pero ang mahalaga lang
+          ata sa'yo ay may kausap ka, and I mistook that as wanting a closer
+          connection. Hindi pala, haha. Mali ko 'yun. Ang dami kong gustong
+          sabihin sa'yo — lahat ng lungkot na naramdaman ko sa buwan na 'yon,
+          gaano ako nainis tuwing dadaanan mo lang ako and not even try na
+          lumapit. In fact, iniiwasan mo nga ako eh haha. Nabasa ko rin mga
+          convo mo with Lanah and kinukuwento rin nila mga times na they talked
+          to you. Grabe, wish ko 'yun buong May eh! Kahit nagsimula na ako sa
+          pagsoft-block sa'yo noong start ng May, that was because I felt hurt
+          sa sinabi mo na next week ka babawi because of org events. I thought
+          noon na baka naman next week ka nga babawi or baka kakausapin mo ako
+          some time kasi narealize gaano ka-asshole ka sa pagsabi sa'kin na
+          maghintay sa pagbabawi mo. Alam mo rin naman na 'pag tahimik ako,
+          galit ako sa'yo. 'Yung mga jokes na ginawa namin about the situation
+          was simply my coping mechanism kasi gusto mo bang pumasok ako ng ang
+          puffy ng mata ko? Na umiyak nanaman ako dahil ramdam ko ginamit lang
+          ako ng tao na tinuri kong kaibigan?
+          <br /><br />
+          Buong May narealize ko rin na 'di mo ako kilala the same way na kilala
+          kita. Alam ko galawan mo eh, at least kung ano makakaya ko sa isang
+          taon natin magkaibigan. Kapag may problema na may emotions/feelings na
+          kinalaman, mamaya mo 'yun iintindihin, kapag natapos mo na lahat ng
+          kailangan mong gawin (acads and whatever tf you prioritized). Inisip
+          ko rin 'yon, so naghintay ako ng isang buong month. Tangina, hanggang
+          ngayon nga naghihintay ako eh. Kahit sabihin ko sa utak ko na sure na
+          ako na 'di naman totoo mga sinabi mong pagbabawi na 'yan, nagaantay
+          puso ko haha. Ilang beses ko inisip at sinubukan intindihin side mo,
+          bakit ka tumahimik nalang at bakit mo ginagawa 'yung mga 'yon. Lagi
+          nalang ending ng mga ganoong thoughts ko is that I'm probably the
+          worst person alive and ang kupal kong tao na 'di ako naghintay ng
+          konti pa. Pero grabe, itatabi ko ulit nararamdaman ko para sa'yo?
+          Parang wala na akong respeto sa sarili ko kapag ginawa ko 'yun.
+          <br /><br />
+          Ang mahirap rin is that hindi ko kayang matanggal sa utak ko na maging
+          concerned sa'yo — kung kamusta na acads mo, events ar application mo
+          sa org, or 'yung pakiramdam mo kasi rinig ko dati na nagkalagnat ka,
+          and stuff like that. Kaya sabi nila 'di mo ako deserve and 'yung mga
+          effort na binigay ko sa'yo in the name of friendship, and I agree. 'Di
+          mo deserve the way I love my friends, the way I treasure friendships.
+          Napakagago mo naman kasi haha. Naisip mo ba kung ano kaya pakiramdam
+          ko noong sinend mo 'yung last chat mo sa akin? Naisip mo ba kung ano
+          'yung naging situation before that? Ta's malalaman ko nalang through
+          mga reposts and nalilike mong posts sa IG na hahaha ano, emotionally
+          unresponsive and hard to read? Malalaman ko rin sa iba na ang tingin
+          mo pala sa'kin is someone who wanted you to prioritize friendship over
+          acads kahit org work rinason mo sa'kin? Sinungaling ka rin eh. Ta's
+          may rinepost ka rin na hindi ka perfect but you will listen to what's
+          hurting a person kahit 2am na? Hoped you did the same for me.
+          <br /><br />
+          So ano ang point ng letter na'to kung hindi kita masabihan ng "thank
+          you" ng lubusan? Gusto ko lang sabihin sa'yo na thank you pa rin for
+          the memories at sana ma-bury lahat 'yun sa past kasi starting now, you
+          are a stranger to me. I don't care kung makakailang iyak ulit ako
+          after sending this to you and picturing you reading this, probably
+          dedmang expression nga lang yan eh. Wala kang paki sa akin eh
+          hahahaha. Ayoko lang rin kasi na maging awkward tayo if biglang ginawa
+          tayong magkaklase ng tadhana, even worse kung ginawa tayong lab
+          partners haha. I need the closure, need ko masabi lahat ng ito sa'yo
+          at sana may matutunan ka sa ginawa mong kagaguhan. Itatago ko nalang
+          or ipapamigay sa iba 'yung mga anik anik na nabili ko thinking of you.
+          Sa'yo nalang siguro 'yung joystick at keypad, tutal iniiwasan mo ako
+          at mukhang wala ka namang ibalik 'yun sa'kin, lmao bahala na.
+          <br /><br />
+          Thank you for the "friendship," Steven. I hope we never cross paths.
+          <br /><br />
+          Sincerely,
+          <br />
+          <span class="script-text" style="font-size: clamp(22px, 4vw, 30px)"
+            >Ysa</span
+          >
+        </p>
+      </div>
+    </div>
+
+    <script>
+      let musicStarted = false;
+
+      function toggleFlip(e) {
+        e.stopPropagation();
+        const card = document.getElementById("card");
+        const music = document.getElementById("bgMusic");
+        card.classList.toggle("flipped");
+        if (!musicStarted) {
+          music && music.play().catch(() => {});
+          musicStarted = true;
+        }
+      }
+
+      window.onload = function () {
+        particlesJS("particles-js", {
+          particles: {
+            number: { value: 150, density: { enable: true, value_area: 800 } },
+            color: { value: ["#ffffff", "#f5b8b8", "#e57373", "#fdecea"] },
+            shape: { type: "circle" },
+            opacity: { value: 0.6, random: true },
+            size: { value: 3.5, random: true },
+            line_linked: {
+              enable: true,
+              distance: 150,
+              color: "#e07070",
+              opacity: 0,
+              width: 1,
+            },
+            move: {
+              enable: true,
+              speed: 4,
+              direction: "none",
+              random: true,
+              straight: false,
+              out_mode: "out",
+              bounce: false,
+            },
+          },
+          interactivity: {
+            detect_on: "window",
+            events: {
+              onhover: { enable: true, mode: "grab" },
+              onclick: { enable: true, mode: "push" },
+              resize: true,
+            },
+            modes: {
+              grab: { distance: 200, line_linked: { opacity: 0.8 } },
+              push: { particles_nb: 25 },
+            },
+          },
+          retina_detect: true,
+        });
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,296 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <title>for cessy! (˶˃ᵕ˂˶)</title>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #6a1b9a;
+        font-family: "Montserrat", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        perspective: 1000px;
+      }
+
+      #particles-js {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        background-image: radial-gradient(ellipse, #e1bee7, #38006b);
+      }
+
+      .card-container {
+        position: relative;
+        width: min(90vw, 450px);
+        height: min(80vh, 500px);
+        transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        transform-style: preserve-3d;
+        cursor: pointer;
+        z-index: 10;
+      }
+
+      @media (max-width: 480px) {
+        .card-container {
+          width: 92vw;
+          height: 82vh;
+        }
+      }
+
+      @media (min-width: 900px) {
+        .card-container {
+          width: min(70vw, 700px);
+          height: min(75vh, 560px);
+        }
+      }
+
+      .card-container.flipped {
+        transform: rotateY(180deg);
+      }
+
+      .front,
+      .back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        box-shadow:
+          0 10px 40px rgba(0, 0, 0, 0.5),
+          0 0 20px #ce93d8;
+      }
+
+      .front {
+        background-color: #f3e5f5;
+        background-image: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+        padding: 20px;
+      }
+
+      .front::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(156, 39, 176, 0.07);
+        clip-path: polygon(0 0, 50% 50%, 100% 0, 100% 100%, 0 100%);
+        border-radius: 20px;
+      }
+
+      .back {
+        background-color: white;
+        transform: rotateY(180deg);
+        padding: clamp(20px, 4vw, 40px);
+        justify-content: flex-start;
+        overflow-y: auto;
+      }
+
+      .stamp-button {
+        width: clamp(55px, 10vw, 80px);
+        height: clamp(55px, 10vw, 80px);
+        background: linear-gradient(135deg, #4a148c, #ab47bc);
+        border-radius: 50%;
+        border: 3px dashed white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 0 15px #ce93d8;
+        animation: stampPulse 2s infinite;
+        z-index: 2;
+        margin: 10px 0;
+        flex-shrink: 0;
+      }
+
+      @keyframes stampPulse {
+        0% {
+          box-shadow: 0 0 10px #ab47bc;
+        }
+        50% {
+          box-shadow:
+            0 0 20px #ab47bc,
+            0 0 30px rgba(171, 71, 188, 0.4);
+        }
+        100% {
+          box-shadow: 0 0 10px #ab47bc;
+        }
+      }
+
+      .stamp-button::after {
+        content: "❤";
+        color: white;
+        font-size: clamp(22px, 4vw, 34px);
+      }
+
+      .script-text {
+        font-family: "Great Vibes", cursive;
+        color: #6a1b9a;
+        text-align: center;
+      }
+
+      .front .script-text {
+        font-size: clamp(32px, 8vw, 58px);
+        margin: 0;
+        z-index: 2;
+      }
+
+      .back .script-text {
+        font-size: clamp(22px, 5vw, 36px);
+        margin-top: 0;
+      }
+
+      .back p {
+        text-align: justify;
+        line-height: 1.7;
+        font-size: clamp(12px, 1.8vw, 15px);
+        color: #333;
+        margin: 0;
+      }
+
+      .click-hint {
+        margin-top: 10px;
+        font-weight: bold;
+        color: #6a1b9a;
+        font-size: clamp(8px, 1.5vw, 11px);
+        letter-spacing: 2px;
+        z-index: 2;
+      }
+
+      .back::-webkit-scrollbar {
+        width: 5px;
+      }
+      .back::-webkit-scrollbar-thumb {
+        background: #ab47bc;
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="particles-js"></div>
+
+    <div class="card-container" id="card" onclick="toggleFlip(event)">
+      <div class="front">
+        <p class="script-text">⋆˚࿔ to cessy 𝜗𝜚˚⋆</p>
+        <div class="stamp-button"></div>
+        <p class="click-hint">flip me.</p>
+      </div>
+
+      <div class="back">
+        <h1 class="script-text">☆*: .｡. Surprise! .｡.:*☆</h1>
+        <p>
+          <br />
+          HEWWO CESSSSSYYYYY!! (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ I hope you like this little
+          surprise hehehehe I just want to congratulate you for surviving
+          freshie year YAAAAYAAYYAYAYAYAYYY!! I'm really proud of you for making
+          it through all the challenges and changes that came with it.
+          <br /><br />
+          I want you to know rin na kahit magkaiba tayo ng course and campus
+          (huhu), you are still played an amazing part in my freshie year
+          because without your nerdy anime jokes and your very very cute
+          kakulitan, I would've lost the nerd in me and probably won't have
+          enjoyed freshie year as much as I did due to many crashouts. I
+          appreciate all of your random chats, may it be about how econ or kas
+          are the worst subjects in existence, or how mini neji is incredibly
+          cute, maybe your spiderman (lmao), and other anime and kpop stuff. I
+          also really admire how you are so passionate about the things you love
+          and how you are not afraid to express yourself, which is something I
+          aspire to be more like. Thank you for also always comforting me with
+          your advice, I treasure them always as much as I treasure you.
+          <br /><br />
+          You are such a kind and caring person, and I'm grateful to have you as
+          a friend until now. I hope that you get to rest well during this
+          break, 'wag mong <b>CESSY</b>angin! HAHAHAHAHA LOVE YOUUUU MWAMWA !!
+          <br /><br />
+          <span class="script-text" style="font-size: clamp(22px, 4vw, 30px)"
+            >Ysa</span
+          >
+        </p>
+      </div>
+    </div>
+
+    <script>
+      let musicStarted = false;
+
+      function toggleFlip(e) {
+        e.stopPropagation();
+        const card = document.getElementById("card");
+        const music = document.getElementById("bgMusic");
+        card.classList.toggle("flipped");
+        if (!musicStarted) {
+          music && music.play().catch(() => {});
+          musicStarted = true;
+        }
+      }
+
+      window.onload = function () {
+        particlesJS("particles-js", {
+          particles: {
+            number: { value: 150, density: { enable: true, value_area: 800 } },
+            color: { value: ["#ffffff", "#ce93d8", "#ab47bc", "#f3e5f5"] },
+            shape: { type: "circle" },
+            opacity: { value: 0.6, random: true },
+            size: { value: 3.5, random: true },
+            line_linked: {
+              enable: true,
+              distance: 150,
+              color: "#ce93d8",
+              opacity: 0,
+              width: 1,
+            },
+            move: {
+              enable: true,
+              speed: 4,
+              direction: "none",
+              random: true,
+              straight: false,
+              out_mode: "out",
+              bounce: false,
+            },
+          },
+          interactivity: {
+            detect_on: "window",
+            events: {
+              onhover: { enable: true, mode: "grab" },
+              onclick: { enable: true, mode: "push" },
+              resize: true,
+            },
+            modes: {
+              grab: { distance: 200, line_linked: { opacity: 0.8 } },
+              push: { particles_nb: 25 },
+            },
+          },
+          retina_detect: true,
+        });
+      };
+    </script>
+  </body>
+</html>

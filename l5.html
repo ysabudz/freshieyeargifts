@@ -1,0 +1,293 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <title>for lanah! 𐙚</title>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #c2185b;
+        font-family: "Montserrat", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        perspective: 1000px;
+      }
+
+      #particles-js {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        background-image: radial-gradient(ellipse, #ffb6d9, #880e4f);
+      }
+
+      .card-container {
+        position: relative;
+        width: min(90vw, 450px);
+        height: min(80vh, 500px);
+        transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        transform-style: preserve-3d;
+        cursor: pointer;
+        z-index: 10;
+      }
+
+      @media (max-width: 480px) {
+        .card-container {
+          width: 92vw;
+          height: 82vh;
+        }
+      }
+
+      @media (min-width: 900px) {
+        .card-container {
+          width: min(70vw, 700px);
+          height: min(75vh, 560px);
+        }
+      }
+
+      .card-container.flipped {
+        transform: rotateY(180deg);
+      }
+
+      .front,
+      .back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        box-shadow:
+          0 10px 40px rgba(0, 0, 0, 0.5),
+          0 0 20px #f48fb1;
+      }
+
+      .front {
+        background-color: #fce4ec;
+        background-image: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+        padding: 20px;
+      }
+
+      .front::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 105, 157, 0.08);
+        clip-path: polygon(0 0, 50% 50%, 100% 0, 100% 100%, 0 100%);
+        border-radius: 20px;
+      }
+
+      .back {
+        background-color: white;
+        transform: rotateY(180deg);
+        padding: clamp(20px, 4vw, 40px);
+        justify-content: flex-start;
+        overflow-y: auto;
+      }
+
+      .stamp-button {
+        width: clamp(55px, 10vw, 80px);
+        height: clamp(55px, 10vw, 80px);
+        background: linear-gradient(135deg, #ad1457, #f06292);
+        border-radius: 50%;
+        border: 3px dashed white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 0 15px #f48fb1;
+        animation: stampPulse 2s infinite;
+        z-index: 2;
+        margin: 10px 0;
+        flex-shrink: 0;
+      }
+
+      @keyframes stampPulse {
+        0% {
+          box-shadow: 0 0 10px #f06292;
+        }
+        50% {
+          box-shadow:
+            0 0 20px #f06292,
+            0 0 30px rgba(240, 98, 146, 0.4);
+        }
+        100% {
+          box-shadow: 0 0 10px #f06292;
+        }
+      }
+
+      .stamp-button::after {
+        content: "❤";
+        color: white;
+        font-size: clamp(22px, 4vw, 34px);
+      }
+
+      .script-text {
+        font-family: "Great Vibes", cursive;
+        color: #ad1457;
+        text-align: center;
+      }
+
+      .front .script-text {
+        font-size: clamp(32px, 8vw, 58px);
+        margin: 0;
+        z-index: 2;
+      }
+
+      .back .script-text {
+        font-size: clamp(22px, 5vw, 36px);
+        margin-top: 0;
+      }
+
+      .back p {
+        text-align: justify;
+        line-height: 1.7;
+        font-size: clamp(12px, 1.8vw, 15px);
+        color: #333;
+        margin: 0;
+      }
+
+      .click-hint {
+        margin-top: 10px;
+        font-weight: bold;
+        color: #ad1457;
+        font-size: clamp(8px, 1.5vw, 11px);
+        letter-spacing: 2px;
+        z-index: 2;
+      }
+
+      .back::-webkit-scrollbar {
+        width: 5px;
+      }
+      .back::-webkit-scrollbar-thumb {
+        background: #f06292;
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="particles-js"></div>
+
+    <div class="card-container" id="card" onclick="toggleFlip(event)">
+      <div class="front">
+        <p class="script-text">౨ৎ˖.to lanah.˖౨ৎ</p>
+        <div class="stamp-button"></div>
+        <p class="click-hint">flip me.</p>
+      </div>
+
+      <div class="back">
+        <h1 class="script-text">☆*: .｡. Surprise! .｡.:*☆</h1>
+        <p>
+          <br />HAI LANAAAAAAH! Surprise po hihihi. I hope you like this e-card
+          I made for you hihi. I know it's not much but I just wanted to do
+          something special for you kasi CONGRATSSS, natapos rin freshie year!!
+          (SA WAKAS). <br /><br />
+          Thank you for being such an amazing friend — lagi ka nandyan para
+          magbigay ng suporta at comfort, very nanay of the group core HAHAHA.
+          I'm thankful that you are a part of my freshie year and I hope we can
+          make more mEEEmories together in the coming years (gets, mEEEmories...
+          haha...). I hope nakatulong rin ako kahit papaano sa pag-adjust mo sa
+          college life like how you helped me adjust din kasi you have this
+          optimistic, joyful energy na I hope 'di mawawala huhu. Thank you rin
+          for the amount of time you helped me understand acads stuff huhu. I
+          can't picture my freshie year without you in it, and 'di ko rin
+          maimagine mga susunod na taon na wala ako sa tabi mo bebs.
+          <br /><br />I wish you the best for the next years of college and I
+          hope you achieve all your goals and dreams! I know na kayang-kaya mo
+          yan because ang hardworking mong tao hehe idol talaga. I hope you
+          continue to shine bright and spread your positive energy to everyone
+          around you, and remember wa<b>LANAH</b>g makakapantay sa kacutean at
+          kagalingan mo bebe! MWAMWA BEBE, LOVE YOUUUU SM!!<br /><br />
+          <span class="script-text" style="font-size: clamp(22px, 4vw, 30px)"
+            >Ysa</span
+          >
+        </p>
+      </div>
+    </div>
+
+    <script>
+      let musicStarted = false;
+
+      function toggleFlip(e) {
+        e.stopPropagation();
+        const card = document.getElementById("card");
+        const music = document.getElementById("bgMusic");
+        card.classList.toggle("flipped");
+        if (!musicStarted) {
+          music && music.play().catch(() => {});
+          musicStarted = true;
+        }
+      }
+
+      window.onload = function () {
+        particlesJS("particles-js", {
+          particles: {
+            number: { value: 150, density: { enable: true, value_area: 800 } },
+            color: { value: ["#ffffff", "#f48fb1", "#f06292", "#fce4ec"] },
+            shape: { type: "circle" },
+            opacity: { value: 0.6, random: true },
+            size: { value: 3.5, random: true },
+            line_linked: {
+              enable: true,
+              distance: 150,
+              color: "#f48fb1",
+              opacity: 0,
+              width: 1,
+            },
+            move: {
+              enable: true,
+              speed: 4,
+              direction: "none",
+              random: true,
+              straight: false,
+              out_mode: "out",
+              bounce: false,
+            },
+          },
+          interactivity: {
+            detect_on: "window",
+            events: {
+              onhover: { enable: true, mode: "grab" },
+              onclick: { enable: true, mode: "push" },
+              resize: true,
+            },
+            modes: {
+              grab: { distance: 200, line_linked: { opacity: 0.8 } },
+              push: { particles_nb: 25 },
+            },
+          },
+          retina_detect: true,
+        });
+      };
+    </script>
+  </body>
+</html>

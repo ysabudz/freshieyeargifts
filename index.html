@@ -1,0 +1,446 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <title>gifts? gifts!</title>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        font-family: "Montserrat", sans-serif;
+        overflow: hidden;
+      }
+
+      #particles-js {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 0;
+      }
+
+      /* Animated calm pastel background */
+      @keyframes rainbowShift {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      #particles-js {
+        background: linear-gradient(
+          135deg,
+          #ffb3ba,
+          /* Pastel Pink */ #ffdfba,
+          /* Pastel Orange */ #ffffba,
+          /* Pastel Yellow */ #baffc9,
+          /* Pastel Green */ #bae1ff,
+          /* Pastel Blue */ #e8c4ff,
+          /* Pastel Purple */ #ffb3ba /* Loop back to Pink */
+        );
+        background-size: 400% 400%;
+        /* Slowed down from 10s to 30s for a calm fluid look */
+        animation: rainbowShift 30s ease infinite;
+      }
+
+      /* soft overlay so it looks even calmer */
+      #particles-js::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(255, 255, 255, 0.15);
+        pointer-events: none;
+      }
+
+      .page-wrapper {
+        position: relative;
+        z-index: 2;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 24px;
+        padding: 40px 20px;
+      }
+
+      .header-box {
+        text-align: center;
+      }
+
+      h1 {
+        font-family: "Great Vibes", cursive;
+        font-size: clamp(52px, 12vw, 90px);
+        color: #000000;
+        text-shadow:
+          0 0 18px rgba(255, 255, 255, 0.9),
+          0 0 40px rgba(255, 255, 255, 0.5);
+        margin: 0 0 6px;
+      }
+
+      h2 {
+        font-size: clamp(11px, 2vw, 15px);
+        letter-spacing: 2px;
+        color: rgba(0, 0, 0, 0.95);
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin: 0;
+      }
+
+      /* soft rainbow shimmer border animation */
+      @keyframes borderShift {
+        0% {
+          border-color: #ffb3ba;
+          box-shadow:
+            0 10px 40px rgba(0, 0, 0, 0.15),
+            0 0 24px rgba(255, 179, 186, 0.6);
+        }
+        20% {
+          border-color: #ffdfba;
+          box-shadow:
+            0 10px 40px rgba(0, 0, 0, 0.15),
+            0 0 24px rgba(255, 223, 186, 0.6);
+        }
+        40% {
+          border-color: #ffffba;
+          box-shadow:
+            0 10px 40px rgba(0, 0, 0, 0.15),
+            0 0 24px rgba(255, 255, 186, 0.6);
+        }
+        60% {
+          border-color: #baffc9;
+          box-shadow:
+            0 10px 40px rgba(0, 0, 0, 0.15),
+            0 0 24px rgba(186, 255, 201, 0.6);
+        }
+        80% {
+          border-color: #bae1ff;
+          box-shadow:
+            0 10px 40px rgba(0, 0, 0, 0.15),
+            0 0 24px rgba(186, 225, 255, 0.6);
+        }
+        100% {
+          border-color: #ffb3ba;
+          box-shadow:
+            0 10px 40px rgba(0, 0, 0, 0.15),
+            0 0 24px rgba(255, 179, 186, 0.6);
+        }
+      }
+
+      .login-box {
+        width: 90%;
+        max-width: 460px;
+        padding: clamp(24px, 5vw, 40px);
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border: 2px solid #ffb3ba;
+        animation: borderShift 12s linear infinite;
+      }
+
+      .form-group {
+        margin-bottom: 18px;
+      }
+
+      label {
+        display: block;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: #777;
+        margin-bottom: 6px;
+      }
+
+      input {
+        width: 100%;
+        padding: 10px 14px;
+        border: 1.5px solid #eaeaea;
+        border-radius: 10px;
+        font-family: "Montserrat", sans-serif;
+        font-size: 14px;
+        background: #fcfcfc;
+        color: #444;
+        outline: none;
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s;
+      }
+
+      input:focus {
+        border-color: #cbd5e1;
+        box-shadow: 0 0 0 3px rgba(203, 213, 225, 0.3);
+      }
+
+      .center-content {
+        text-align: center;
+        margin-top: 8px;
+      }
+
+      .hint {
+        font-size: 11px;
+        color: #000000;
+        margin-bottom: 16px;
+        font-style: italic;
+      }
+
+      /* soft pastel button animation */
+      @keyframes btnShift {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      .button {
+        background: linear-gradient(
+          90deg,
+          #ffb3ba,
+          #ffdfba,
+          #ffffba,
+          #baffc9,
+          #bae1ff,
+          #e8c4ff,
+          #ffb3ba
+        );
+        background-size: 300% 300%;
+        animation: btnShift 12s ease infinite; /* Slowed down button transition */
+        color: #555; /* Darker text for readability over pastel colors */
+        padding: 10px 48px;
+        border: none;
+        border-radius: 50px;
+        font-family: "Montserrat", sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+        cursor: pointer;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+        transition:
+          transform 0.15s,
+          box-shadow 0.15s;
+      }
+
+      .button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .button:active {
+        transform: translateY(0);
+      }
+
+      /* modal */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 10;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.25);
+        justify-content: center;
+        align-items: center;
+      }
+
+      .modal.show {
+        display: flex;
+      }
+
+      .modal-content {
+        background: white;
+        padding: 32px 40px;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        border: 2px solid #ffb3ba;
+        animation: borderShift 12s linear infinite;
+        max-width: 360px;
+        width: 90%;
+      }
+
+      .modal-content h3 {
+        font-family: "Great Vibes", cursive;
+        font-size: 40px;
+        color: #666;
+        margin: 0 0 8px;
+      }
+
+      .modal-content p {
+        font-size: 13px;
+        color: #777;
+        margin-bottom: 20px;
+      }
+
+      .modal-button {
+        background: linear-gradient(
+          90deg,
+          #ffb3ba,
+          #ffdfba,
+          #ffffba,
+          #baffc9,
+          #bae1ff,
+          #e8c4ff,
+          #ffb3ba
+        );
+        background-size: 300% 300%;
+        animation: btnShift 12s ease infinite;
+        color: #555;
+        padding: 8px 32px;
+        border: none;
+        border-radius: 50px;
+        font-family: "Montserrat", sans-serif;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="particles-js"></div>
+
+    <div class="page-wrapper">
+      <div class="header-box">
+        <h1>surprise!</h1>
+        <h2>a gift from ysa ヾ(≧▽≦*)o</h2>
+      </div>
+
+      <div class="login-box">
+        <form onsubmit="redirectToPage(event)">
+          <div class="form-group">
+            <label>Username</label>
+            <input type="text" id="user" autocomplete="off" />
+          </div>
+
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="password" />
+          </div>
+
+          <div class="center-content">
+            <p class="hint">
+              username: lastname (sorry boring ahh user)<br />
+              password: 1st letter of nickname + total letters of nn + 143!
+              <br>
+              (example: y3143! (if not sure pa rin, message me hehe))
+              <br /><br />
+              <p style="color: #000000; font-size: 11px; font-weight: bold;">NO SNOOPING OF OTHER PEOPLE'S LETTERS PLEASE (>人<)</p>
+            </p>
+            <button class="button" type="submit">Log In</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="errorModal" class="modal">
+      <div class="modal-content">
+        <h3>oops!</h3>
+        <p>Invalid username or password. Try again?</p>
+        <button class="modal-button" id="closeModalButton">Close</button>
+      </div>
+    </div>
+
+    <script src="info.js"></script>
+
+    <script>
+      function redirectToPage(event) {
+        event.preventDefault();
+        const user = document.getElementById("user").value.trim().toLowerCase();
+        const pass = document.getElementById("password").value.trim();
+        const modal = document.getElementById("errorModal");
+        const closeBtn = document.getElementById("closeModalButton");
+
+        // Look for the element in array that matches both decrypted user and password
+        const foundUser = creds.find(
+          (c) => atob(c.u) === user && atob(c.p) === pass,
+        );
+
+        function closeModal() {
+          modal.classList.remove("show");
+        }
+        closeBtn.onclick = closeModal;
+        window.onclick = (e) => {
+          if (e.target === modal) closeModal();
+        };
+
+        if (foundUser) {
+          setTimeout(() => {
+            // Redirects specifically to the target specified for that user
+            window.location.href = foundUser.target;
+          }, 1500);
+        } else {
+          modal.classList.add("show");
+        }
+      }
+
+      window.onload = function () {
+        particlesJS("particles-js", {
+          particles: {
+            number: { value: 90, density: { enable: true, value_area: 800 } },
+            color: {
+              value: [
+                "#ffb3ba",
+                "#ffdfba",
+                "#ffffba",
+                "#baffc9",
+                "#bae1ff",
+                "#e8c4ff",
+              ],
+            },
+            shape: { type: "circle" },
+            opacity: { value: 0.6, random: true },
+            size: { value: 3.5, random: true },
+            line_linked: {
+              enable: false,
+            },
+            move: {
+              enable: true,
+              speed: 1.5 /* Slowed particle movement down for a calmer feel */,
+              direction: "none",
+              random: true,
+              straight: false,
+              out_mode: "out",
+              bounce: false,
+            },
+          },
+          interactivity: {
+            detect_on: "window",
+            events: {
+              onhover: { enable: true, mode: "bubble" },
+              onclick: { enable: true, mode: "push" },
+              resize: true,
+            },
+            modes: {
+              bubble: { distance: 200, size: 6, duration: 2, opacity: 0.8 },
+              push: { particles_nb: 10 },
+            },
+          },
+          retina_detect: true,
+        });
+      };
+    </script>
+  </body>
+</html>

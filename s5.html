@@ -1,0 +1,308 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <title>for sunny! ☀︎</title>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #e07b00;
+        font-family: "Montserrat", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        perspective: 1000px;
+      }
+
+      #particles-js {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        background-image: radial-gradient(ellipse, #ffe680, #b84c00);
+      }
+
+      /* Responsive card: fills viewport with comfortable padding */
+      .card-container {
+        position: relative;
+        width: min(90vw, 450px);
+        height: min(80vh, 500px);
+        transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        transform-style: preserve-3d;
+        cursor: pointer;
+        z-index: 10;
+      }
+
+      /* On small screens (phones), stretch more */
+      @media (max-width: 480px) {
+        .card-container {
+          width: 92vw;
+          height: 82vh;
+        }
+      }
+
+      /* On large screens, allow bigger card */
+      @media (min-width: 900px) {
+        .card-container {
+          width: min(70vw, 700px);
+          height: min(75vh, 560px);
+        }
+      }
+
+      .card-container.flipped {
+        transform: rotateY(180deg);
+      }
+
+      .front,
+      .back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        box-shadow:
+          0 10px 40px rgba(0, 0, 0, 0.5),
+          0 0 20px #ffb347;
+      }
+
+      .front {
+        background-color: #fff8e1;
+        background-image: linear-gradient(135deg, #fff8e1 0%, #ffe0a0 100%);
+        padding: 20px;
+      }
+
+      .front::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 180, 50, 0.1);
+        clip-path: polygon(0 0, 50% 50%, 100% 0, 100% 100%, 0 100%);
+        border-radius: 20px;
+      }
+
+      .back {
+        background-color: white;
+        transform: rotateY(180deg);
+        padding: clamp(20px, 4vw, 40px);
+        justify-content: flex-start;
+        overflow-y: auto;
+      }
+
+      .stamp-button {
+        width: clamp(55px, 10vw, 80px);
+        height: clamp(55px, 10vw, 80px);
+        background: linear-gradient(135deg, #e65c00, #f9a825);
+        border-radius: 50%;
+        border: 3px dashed white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 0 15px #ffb347;
+        animation: stampPulse 2s infinite;
+        z-index: 2;
+        margin: 10px 0;
+        flex-shrink: 0;
+      }
+
+      @keyframes stampPulse {
+        0% {
+          box-shadow: 0 0 10px #f9a825;
+        }
+        50% {
+          box-shadow:
+            0 0 20px #f9a825,
+            0 0 30px rgba(249, 168, 37, 0.4);
+        }
+        100% {
+          box-shadow: 0 0 10px #f9a825;
+        }
+      }
+
+      .stamp-button::after {
+        content: "❤";
+        color: white;
+        font-size: clamp(22px, 4vw, 34px);
+      }
+
+      .script-text {
+        font-family: "Great Vibes", cursive;
+        color: #c75000;
+        text-align: center;
+      }
+
+      .front .script-text {
+        font-size: clamp(32px, 8vw, 58px);
+        margin: 0;
+        z-index: 2;
+      }
+
+      .back .script-text {
+        font-size: clamp(22px, 5vw, 36px);
+        margin-top: 0;
+      }
+
+      .back p {
+        text-align: justify;
+        line-height: 1.7;
+        font-size: clamp(12px, 1.8vw, 15px);
+        color: #333;
+        margin: 0;
+      }
+
+      .click-hint {
+        margin-top: 10px;
+        font-weight: bold;
+        color: #c75000;
+        font-size: clamp(8px, 1.5vw, 11px);
+        letter-spacing: 2px;
+        z-index: 2;
+      }
+
+      .back::-webkit-scrollbar {
+        width: 5px;
+      }
+      .back::-webkit-scrollbar-thumb {
+        background: #f9a825;
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="particles-js"></div>
+
+    <div class="card-container" id="card" onclick="toggleFlip(event)">
+      <div class="front">
+        <p class="script-text">𖤓.˖ to sunny ˖.𖤓</p>
+        <div class="stamp-button"></div>
+        <p class="click-hint">flip me.</p>
+      </div>
+
+      <div class="back">
+        <h1 class="script-text">☆*: .｡. Surprise! .｡.:*☆</h1>
+        <p>
+          <br />
+          HELLO SNUYYYYY! I wasn't kidding when I said that making websites is a
+          love language of mine mwehehehe. <br /><br />
+          I just wanted to write this letter to you to congratulate you on
+          finishing freshie year! I'm very grateful na ikaw 'yung una kong
+          naging kaibigan sa UP, and I hope na kahit papaano, nakatulong ako
+          sa'yo sa pag-adjust sa college life. I know na medyo mahirap ang first
+          year (siyempre nasa eeei tayo, kainis), but YOU did it! I'm so proud
+          of you for persevering through all of that. :><br /><br />
+          This school year was so... chaotic. Acads-wise, haha... ilang beses na
+          tayo muntikan mag-shift out of EEEI and ilang beses na tayo naging
+          alanganin sa mga lintek na classes na 'yan (sa fg natin... 'wag na
+          pag-usapan haha), but I was happy to go through all that chaos because
+          I was with you hehe... I don't know how I would've survived this
+          freshie year without you, and I can't picture myself going through the
+          next years na wala ka, my #1 crashout buddy and my bff who matches my
+          freak very fricking well.<br /><br />
+          I have also always appreciated how you always listen to me rant about
+          my problems and how you always give me good advice. I know that
+          sometimes na I can be too much, but you always handle it with so much
+          patience and understanding, and I really admire that about you. You
+          are such a kind and caring person, and I'm so lucky to have you as a
+          friend. I hope that we can continue to be friends for a long time, and
+          I can't wait to see what the future holds for us. :D<br /><br />
+          I don't know how to show how much I appreciate you kasi 'di talaga ako
+          magaling with words haha, but I hope that this letter and website can
+          show you how much I care about you and how much I value our
+          friendship. You are such an amazEEEng person, and I'm so grateful to
+          have you in my life (hehe seee what i did there). Congratulations
+          again on finishing freshie year, and I hope that the next years will
+          be as <b>SUNNY</b> as you! HAHAHSHAHSHAHA LOVE YOU LOTSSSS!! mwamwa
+          hihi send my love to zhan as well (i miss that lil guy) <br /><br />
+          <span class="script-text" style="font-size: clamp(22px, 4vw, 30px)"
+            >Ysa</span
+          >
+        </p>
+      </div>
+    </div>
+
+    <script>
+      let musicStarted = false;
+
+      function toggleFlip(e) {
+        e.stopPropagation();
+        const card = document.getElementById("card");
+        const music = document.getElementById("bgMusic");
+        card.classList.toggle("flipped");
+        if (!musicStarted) {
+          music && music.play().catch(() => {});
+          musicStarted = true;
+        }
+      }
+
+      window.onload = function () {
+        particlesJS("particles-js", {
+          particles: {
+            number: { value: 150, density: { enable: true, value_area: 800 } },
+            color: { value: ["#ffffff", "#FFD700", "#ff8c00", "#fff3cd"] },
+            shape: { type: "circle" },
+            opacity: { value: 0.6, random: true },
+            size: { value: 3.5, random: true },
+            line_linked: {
+              enable: true,
+              distance: 150,
+              color: "#FFD700",
+              opacity: 0,
+              width: 1,
+            },
+            move: {
+              enable: true,
+              speed: 4,
+              direction: "none",
+              random: true,
+              straight: false,
+              out_mode: "out",
+              bounce: false,
+            },
+          },
+          interactivity: {
+            detect_on: "window",
+            events: {
+              onhover: { enable: true, mode: "grab" },
+              onclick: { enable: true, mode: "push" },
+              resize: true,
+            },
+            modes: {
+              grab: { distance: 200, line_linked: { opacity: 0.8 } },
+              push: { particles_nb: 25 },
+            },
+          },
+          retina_detect: true,
+        });
+      };
+    </script>
+  </body>
+</html>
